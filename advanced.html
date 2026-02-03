@@ -1,0 +1,83 @@
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nightlife Coordination</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <canvas id="canvas-bg"></canvas>
+
+  <div class="app-container">
+    <header>
+      <div class="brand">Nightlife</div>
+      <div class="auth-section" id="authSection">
+        <button class="btn btn-ghost" onclick="app.openModal('login')">Log In</button>
+        <button class="btn btn-primary" onclick="app.openModal('register')">Sign Up</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Discover the <span>Night</span></h1>
+        <p>Find the best bars in your city and see where the crowd is gathering tonight.</p>
+
+        <div class="search-container">
+          <form class="search-box" onsubmit="app.handleSearch(event)">
+            <input type="text" class="search-input" id="searchInput" placeholder="Enter city or neighborhood..." autocomplete="off" required>
+            <button type="submit" class="search-btn">Search</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="loader" id="loader">
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+      </div>
+
+      <section class="venues-section" id="venuesSection">
+        <div class="section-header">
+          <h2 class="location-title">Bars in <strong id="locationName">...</strong></h2>
+          <span id="resultsCount" style="color:var(--text-dim)"></span>
+        </div>
+        <div class="venues-grid" id="venuesGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)app.closeModal()">
+    <div class="modal">
+      <button class="modal-close" onclick="app.closeModal()">×</button>
+      <h2 id="modalTitle"><span id="modalAction">Log In</span></h2>
+      <form id="authForm" onsubmit="app.handleAuth(event)">
+        <div class="form-group" id="nameGroup" style="display:none">
+          <label class="form-label">Display Name</label>
+          <input type="text" class="form-input" id="displayName" placeholder="How should we call you?">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-input" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Continue</button>
+      </form>
+      <div class="toggle-auth">
+        <span id="toggleText">Don't have an account?</span>
+        <a onclick="app.toggleAuthMode()" id="toggleLink">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+</body>
+
+</html>
